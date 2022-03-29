@@ -1,11 +1,14 @@
 
 import './Login.css'
+import { useNavigate } from 'react-router-dom';
 import { Card, Button, Form, Alert } from "react-bootstrap"
 import { useEffect, useState } from 'react'
-import axios from 'axios'
+import { login } from "../../services/login"
+import { setUserToken, getUserToken } from '../../helpers/auth-helpers'
 
 
 const Login = () => {
+    const navigate = useNavigate()
     const [token, setToken] = useState(null)
     const [username, setUsername] = useState(null)
     const [password, setPassword] = useState(null)
@@ -13,23 +16,28 @@ const Login = () => {
     const [message, setMessage] = useState("")
 
     useEffect(() => {
-        
+        setToken(getUserToken())
+        console.log(token);
+        if (token) {
+            navigate('/dentists');
+        }
     })
 
-    const login = () => {
+    const doLogin = async () => {
         if (!(username && password)) {
             setMessage("Debe ingresar su nombre de usuario y contraseña")
             setShowAlert(true)
             return;
         }
         setShowAlert(false)
-        axios.post(`${process.env.REACT_APP_API_BASE_URL}login`, {email: username, password: password}).then((response) => {
-            const data = response.data;
-            setToken(data.token)
-        }).catch((error) => {
+        const data = await login(username, password);
+        if (!data) {
             setMessage("Los datos ingresados son incorrectos")
             setShowAlert(true)
-        }) 
+        } else {
+            setUserToken(data.token)
+            setToken(data.token)
+        }
     }
 
     return (
@@ -52,14 +60,14 @@ const Login = () => {
                             <Form.Label>Contraseña</Form.Label>
                             <Form.Control type="password" placeholder="Password" onChange={(e) => setPassword(e.target.value)} />
                         </Form.Group>
-                        <Button variant="success" type="button" onClick={login}>
+                        <Button variant="success" type="button" onClick={doLogin}>
                             Ingresar
                         </Button>
                     </Form>
                 </Card.Body>
                 <small className='text-muted text-center mt-3'>v. {process.env.REACT_APP_VERSION}</small>
             </Card>
-            
+
         </div>
     )
 }
