@@ -17,7 +17,6 @@ const Login = () => {
 
     useEffect(() => {
         setToken(getUserToken())
-        console.log(token);
         if (token) {
             navigate('/dentists');
         }
