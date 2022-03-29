@@ -1,4 +1,6 @@
 import './Dentists.css'
+import 'react-loading-skeleton/dist/skeleton.css'
+import Skeleton from 'react-loading-skeleton'
 import { useEffect, useState } from "react"
 import { Table, Container, Navbar, Nav, Card, Form, Row, Col, Button } from "react-bootstrap"
 import { getAll } from "../../services/dentists"
@@ -156,7 +158,11 @@ const Dentists = () => {
                                     <td>{item.getCreatedAt()}</td>
                                 </tr>
                             ))}
+                            
+                            {dentists.length == 0  &&<td colspan="6"><Skeleton count={20} /></td>}
                         </tbody>
+
+                        
                     </Table>
                 </Card>
             </Container>
