@@ -1,0 +1,19 @@
+.alert{
+    margin: 0 auto;
+}
+.card {
+    margin: 0 auto;
+    width: 60%;
+}
+.card__image{
+    border-radius: 50% !important;
+    display: inline-block;
+    margin: 0 auto;
+    width: 50%;
+}
+
+@media screen and (min-width: 1024px){
+    .card {
+        width: 35%;
+    }
+}
