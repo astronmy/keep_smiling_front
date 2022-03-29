@@ -1,8 +1,8 @@
-## Keep Smiling FE test
+# Keep Smiling FE test
 
 Para el ejercicio se desarrollo una SPA con React + Bootstrapp. La misma interactua con una API desarrollada en Laravel 8
 
-# Instalando dependencias
+## Instalando dependencias
 
 Antes de iniciar debe instalar las dependencias necesarias, para ello ejecute:
 
@@ -12,7 +12,7 @@ Antes de iniciar debe instalar las dependencias necesarias, para ello ejecute:
   
 ```
 
-# Configurando API
+## Configurando API
 
 Para configurar la conexión con la API deberá crear el archivo **env.production** en la raiz del proyecto con la siguiente estructura
 
@@ -25,7 +25,7 @@ Recuerde que en REACT_APP_API_BASE_URL se debe cargar la URL donde tenga configu
 
 Si desea tener una configuración para un entorno de desarrollo cree un archivo con las mismas variables pero con el nombre **env.development** y guardelo en la raíz del proyecto
 
-# Puesta en marcha
+## Puesta en marcha
 
 Para correr el proyecto en modo desarrollo debe ejecutar lo siguiente:
 
@@ -40,7 +40,7 @@ Para correr el proyeto en modo producción ejecute
   
 ```
 
-# Información sobre la API
+## Información sobre la API
 
 En el siguiente vinculo encontrará toda la información sobre la API y los datos de prueba en producción
 
