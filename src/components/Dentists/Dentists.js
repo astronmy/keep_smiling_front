@@ -28,6 +28,7 @@ const Dentists = () => {
 
     const populate = async () => {
         const token = getUserToken()
+        setCountries(await getCountries(getUserToken()))
         setDentists(await getAll(token, { name, surname, country, created }))
     }
 
@@ -41,8 +42,6 @@ const Dentists = () => {
         setSurname(null);
         setCreated(null);
         setCountry(null);
-
-        populate()
     }
 
     useEffect(async() => {
@@ -52,8 +51,11 @@ const Dentists = () => {
         setName((sessionStorage.getItem("name") && sessionStorage.getItem("name")))
         setSurname((sessionStorage.getItem("surname") && sessionStorage.getItem("surname")))
         setCreated((sessionStorage.getItem("created") && sessionStorage.getItem("created")))
-        setCountries(await getCountries(getUserToken()))
+        
     }, [])
+    useEffect(() => {
+        populate()
+    }, [name, created, country, surname])
 
     return (
         <>
@@ -121,9 +123,6 @@ const Dentists = () => {
                     <Row className="d-flex justify-content-end my-2">
                         <Col xs="10" sm="3">
                             <Form.Group className="mb-1">
-                                <Button variant="success" size="sm" onClick={populate}>
-                                    Search
-                                </Button>{' '}
                                 <Button variant="danger" size="sm" onClick={clean}>
                                     Clean
                                 </Button>
